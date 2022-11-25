@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <div class="container-2">
+        {% if carrinho|length == 0 %}
+        <div class="cart-1">
+            <h2 class="cart-1-title">Seu Carrinho está vazio!</h2>
+    
+            <div class="cart-gifs">
+                <img src="/static/gif/confused-John-Travolta.gif" class="adj-gif">
+                <img src="/static/gif/Jack-Sparrow.gif" class="center-gif">
+                <img src="/static/gif/black-dude-crying.gif" class="adj-gif">
+            </div>
+    
+            <button class="general-buttons">
+                <a href="{% url 'produtos:listar_produtos' %}">Ir para loja</a>
+            </button>
+        </div>
+        {% else %}
+        <div class="cart-2">
+            <h2 class="cart-title-2">Seu Carrinho de Compras:</h2>
+            <table class="cart-table">
+                <thead class="cart-thead">
+                    <tr>
+                        <th class="cart-thead-item product-previa"></th>
+                        <th class="cart-thead-item">Produto</th>
+                        <th class="cart-thead-item">Quantidade</th>
+                        <th class="cart-thead-item">Remover</th>
+                        <th class="cart-thead-item">Preço unitário</th>
+                        <th class="cart-thead-item">Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody class="cart-tbody">
+                    {% for item in carrinho %}
+                    {% with produto=item.produto %}
+                    <tr>
+                        <td class="product-previa"><img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" class="cart-product-image"></td>
+
+                        <td class="cart-tbody-item" id="product-name">{{ produto.nome }}</td>
+
+                        <td class="cart-tbody-item">
+                            <form action="{% url 'carrinho:adicionar_ao_carrinho' produto.id %}" method = "post">
+                            {% csrf_token %}
+                                {{ item.formulario_adicionar_produto_ao_carrinho.quantidade }}
+                                {{ item.formulario_adicionar_produto_ao_carrinho.atualizar }}
+                                <input type="submit" value="Atualizar">
+                            </form>
+                        </td>
+
+                        <td class="cart-tbody-item">
+                            <a href="{% url 'carrinho:remover_do_carrinho' produto.id %}" id="cart-remove">Remover</a>
+                        </td>
+
+                        <td class="cart-tbody-item">R$ {{ item.preco }}</td>
+                        
+                        <td class="cart-tbody-item">R$ {{ item.subtotal }}</td>
+                    </tr>
+                    {% endwith %}
+                    {% endfor %}
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="6">Total: R$ {{ carrinho.get_total_geral }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="cart-buttons">
+                <div class="cart-buttons-config">  
+                    <a href="{% url 'produtos:listar_produtos' %}">
+                        <button class="general-buttons">Continuar comprando</button>
+                    </a>
+                </div>
+                    
+                <div class="cart-buttons-config">
+                    <a href="{% url 'pedidos:criar_pedido' %}">
+                        <button class="general-buttons">Finalizar</button>
+                    </a>    
+                </div>
+            </div>
+        </div>  
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+:root
+{
+    /* Colors */
+    --text-color: #DCE7FA;
+    --bg-color: #829FD9;
+    --nav-color: #020F20;
+    --nav-hover-color: #032e65ed;
+    --svg-color: #88B6F2;
+    --cart-table-color: #4E64A6;
+    --cart-thead-color: #273273;
+
+    /* Midias */
+    --pirate-steam-icon: url(/static/img/pirate_steam_icon.jpg);
+    --jack-gif: url(/static/gif/Jack-Sparrow.gif);
+    --mapa-tesouro: url(/static/img/mapa-do-tesouro.jpg);
+
+    /* Fonts */
+    --general-font: 'Chakra Petch', sans-serif;
+    --pirate-font: 'Pirata One', cursive;
+    --ps2-font: 'Press Start 2P', cursive;
+}

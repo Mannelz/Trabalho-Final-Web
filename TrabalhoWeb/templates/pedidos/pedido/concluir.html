@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <div class="container">
+        <h1>Obrigado pela compra!</h1>
+        <p>Seu pedido foi concluído com sucesso.
+            O número do seu pedido é: <strong>#{{ pedido.id }}</strong>
+        </p>
+        
+        <a href="{% url 'produtos:listar_produtos' %}"><button class="general-buttons">Retornar à loja</button></a>
+    </div>
+{% endblock conteudo %}

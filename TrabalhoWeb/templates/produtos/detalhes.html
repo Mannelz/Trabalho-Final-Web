@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <div class="container">
+        <h1>Detalhes do Produto</h1>
+        
+        <br>
+
+        <div class="detalhes-header">
+            <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+            <br>
+            {% if produto.preco != 0 %}
+            <h3><span class="product-name">{{ produto.nome }}:</span> &nbsp R${{ produto.preco }}</h3>
+            {% else %}
+            <h3><span class="product-name">{{ produto.nome }}:</span> &nbsp Grátis</h3>
+            {% endif %}
+        </div>
+
+        <p class="detalhes">{{ produto.descricao|safe|linebreaksbr }}</p>
+        
+        <form action="{% url 'carrinho:adicionar_ao_carrinho' produto.id %}" method="post" class="product-title">
+            {{ form_produto_carrinho }}
+            {% csrf_token %}
+            <input type="submit" value="Adicionar ao carrinho" class="general-buttons">
+        </form>
+    </div>
+{% endblock conteudo %}

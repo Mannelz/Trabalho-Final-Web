@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <div class="container">        
+        <h2>Jogos</h2>
+
+        <div class="category">
+            <a href="/produtos"><button class="general-buttons">Todas as categorias</button></a>
+            {% for categoria in lista_categorias %}
+            <a href="{{ categoria.get_absolute_url }}"><button class="general-buttons">{{ categoria.nome }}</button></a>
+            {% endfor %}
+        </div>
+
+        <div class="produtos__container">
+            {% for produto in lista_produtos %}
+                <div class="card produto__card">
+                    <a href="{{ produto.get_absolute_url }}">
+                        <img class="card-img-top" src="{{ produto.imagem.url }}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{ produto.nome }}</p>
+                        {% if produto.preco != 0 %}
+                        <p> R${{ produto.preco }}</p>
+                        {% else %}
+                        <p> Grátis </p>
+                        {% endif %}
+                        <a href="{{ produto.get_absolute_url }}" class="btn btn-primary">Ver mais detalhes...</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock conteudo %}

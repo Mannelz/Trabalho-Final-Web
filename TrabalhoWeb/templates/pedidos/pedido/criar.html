@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block conteudo %}
+    <div class="container">
+        <h1 class="finish">Finalizar Compra</h1>
+        <h3 class="product-title">Resumo do pedido:</h3>
+        <ul>
+        {% for item in carrinho %}
+        <li>
+            <span class="product-name">{{ item.produto.nome }}:</span> {{ item.quantidade }} x R$ {{ item.preco }}
+        </li>
+        {% endfor %}
+        </ul>
+        <br>
+        <p class="total">Total Geral: R$ {{ carrinho.get_total_geral }}</p>
+        <hr>
+        <h3 class="product-title">Dados:</h3>
+        <form action="." method="post" class="order">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="general-buttons">Enviar pedido</button>
+        </form>
+    </div>
+{% endblock %}

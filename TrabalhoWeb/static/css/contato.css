@@ -1,0 +1,15 @@
+label
+{
+    font-size: 125%;
+}
+
+.contact
+{
+    width: 80vw;
+}
+
+.contact__field
+{
+    width: 100%;
+    border-radius: 10px;
+}
